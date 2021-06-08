@@ -1,4 +1,5 @@
 ﻿using InventoryManager.Pages;
+using InventoryManager.Utility;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -46,6 +47,8 @@ namespace InventoryManager
 
             //Default page navigation
             FrmViews.Navigate(dashboardPage);
+
+            SQLHandler.Save();
         }
 
         private void MainRailMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
