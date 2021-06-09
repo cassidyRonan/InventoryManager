@@ -6,10 +6,12 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+
   <ItemGroup>
-    <PackageReference Include="MaterialDesignThemes" Version="4.1.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    <PackageReference Include="SQLite" Version="3.13.0" />
+    <PackageReference Include="MaterialDesignThemes" Version="4.1.0" PrivateAssets="none"/>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" PrivateAssets="none"/>
+    <PackageReference Include="SQLite" Version="3.13.0" PrivateAssets="none"/>
+	  <PackageReference Include="System.Data.SQLite.Core" Version="1.0.110" PrivateAssets="none"/>
   </ItemGroup>
 
   <ItemGroup>
@@ -20,7 +22,7 @@
 
   <ItemGroup>
     <None Update="System.Data.SQLite.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 

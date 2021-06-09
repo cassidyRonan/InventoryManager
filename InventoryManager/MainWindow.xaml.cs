@@ -48,7 +48,7 @@ namespace InventoryManager
             //Default page navigation
             FrmViews.Navigate(dashboardPage);
 
-            SQLHandler.Save();
+            SQLHandler.CreateNewDB(@"C:\Users\ronan\Documents\Test\");
         }
 
         private void MainRailMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
