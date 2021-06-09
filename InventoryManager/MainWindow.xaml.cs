@@ -1,4 +1,5 @@
-﻿using InventoryManager.Pages;
+﻿using InventoryManager.DataObjects;
+using InventoryManager.Pages;
 using InventoryManager.Utility;
 using System;
 using System.Collections.Generic;
@@ -49,6 +50,10 @@ namespace InventoryManager
             FrmViews.Navigate(dashboardPage);
 
             SQLHandler.CreateNewDB(@"C:\Users\ronan\Documents\Test\");
+
+            ClientObject client = new ClientObject(0, "TestCompany", "First", "Last", "first.last@gmail.com", "+353 090 123 4567", "Old thingy Lane, Co. Antrim");
+            client.ID = SQLHandler.InsertIntoDB(@"C:\Users\ronan\Documents\Test\", SQLConverter.InsertStatement("ClientTable",client));
+            SQLHandler.SelectFromDB(@"C:\Users\ronan\Documents\Test\","SELECT * FROM ClientTable;");
         }
 
         private void MainRailMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)

@@ -6,17 +6,14 @@ namespace InventoryManager.DataObjects
 {
     public abstract class ItemRecord
     {
-        protected string id;
-    }
-
-    public class ConsumableRecord : ItemRecord
-    {
-        private int amount;
-
-        public ConsumableRecord(int amnt, string iD)
+        public long ID
         {
-            amount = amnt;
-            id = iD;
+            get { return id; }
+            set
+            {
+                id = value;
+            }
         }
+        protected long id;
     }
 }

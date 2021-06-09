@@ -1,4 +1,6 @@
-﻿using System;
+﻿using InventoryManager.DataObjects;
+using InventoryManager.Utility;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -21,6 +23,23 @@ namespace InventoryManager.Pages
         public Clients()
         {
             InitializeComponent();
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            RefreshList();
+        }
+
+        private void RefreshList()
+        {
+            List<ClientObject> clientList;
+            clientList = InventoryDAL.GetClients();
+
+            if (clientList != null)
+            {
+                LstBxClients.Items.Clear();
+                LstBxClients.ItemsSource = clientList;
+            }
         }
     }
 }
