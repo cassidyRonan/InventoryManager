@@ -13,7 +13,7 @@
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
         mc:Ignorable="d"
-        Title="Inventory Manager" Height="450" Width="800" >
+        Title="Inventory Manager" Height="720" Width="1080" MinHeight="720" MinWidth="1080" >
 
     <Grid Background="#FF262626">
         <Grid.ColumnDefinitions>
@@ -46,7 +46,7 @@
                 <StackPanel Orientation="Horizontal" materialDesign:RippleAssist.IsCentered="True">
 
                     <!-- Combo Box for selecting search category -->
-                    <ComboBox SelectedIndex="0" Margin="8 0 0 0" BorderThickness="0" materialDesign:ColorZoneAssist.Mode="Standard" materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource MaterialDesignPaper}" BorderBrush="{DynamicResource MaterialDesignPaper}">
+                    <ComboBox Name="CmbBxSearchType" ToolTip="Search Category" SelectedIndex="0" Margin="8 0 0 0" BorderThickness="0" materialDesign:ColorZoneAssist.Mode="Standard" materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource MaterialDesignPaper}" BorderBrush="{DynamicResource MaterialDesignPaper}">
                         <ComboBoxItem Content="Inventory" />
                         <ComboBoxItem Content="Equipment" />
                         <ComboBoxItem Content="Clients" />
@@ -62,14 +62,14 @@
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
 
-                            <Button Style="{DynamicResource MaterialDesignToolButton}" VerticalAlignment="Center">
+                            <Button Name="BtnMainSearch" ToolTip="Search" Style="{DynamicResource MaterialDesignToolButton}" VerticalAlignment="Center">
                                 <materialDesign:PackIcon Kind="Search" Opacity=".56" />
                             </Button>
 
-                            <TextBox Grid.Column="1" Margin="8 0 0 0"
+                            <TextBox Name="TxtBxSearch" Grid.Column="1" Margin="8 0 0 0"
                                 materialDesign:HintAssist.Hint="Search..."
                                 materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
-                                BorderThickness="0" MinWidth="350" VerticalAlignment="Center" />
+                                BorderThickness="0" MinWidth="350" VerticalAlignment="Center" KeyDown="OnKeyDownHandler" />
                         </Grid>
                     </materialDesign:ColorZone>
 
@@ -83,29 +83,29 @@
         <!-- Navigation Rail - Side Menu -->
         <TabControl Name="MainRailMenu" Style="{StaticResource MaterialDesignNavigatilRailTabControl}" materialDesign:ColorZoneAssist.Mode="PrimaryMid" Grid.Row="2" Grid.Column="0" SelectionChanged="MainRailMenu_SelectionChanged" >
 
-            <TabItem Name="TbItmDashboard" Header="{materialDesign:PackIcon Kind=ViewDashboard, Size=24}" Style="{StaticResource MaterialDesignNavigationRailTabItem}" Width="65" Foreground="White" >
+            <TabItem Name="TbItmDashboard" ToolTip="Dashboard" Header="{materialDesign:PackIcon Kind=ViewDashboard, Size=24}" Style="{StaticResource MaterialDesignNavigationRailTabItem}" Width="65" Foreground="White" >
      
             </TabItem>
 
-            <TabItem Name="TbItmInventory" Header="{materialDesign:PackIcon Kind=PackageVariant, Size=24}" Style="{StaticResource MaterialDesignNavigationRailTabItem}" Width="65" Foreground="White">
+            <TabItem Name="TbItmInventory" ToolTip="Equipment" Header="{materialDesign:PackIcon Kind=PackageVariant, Size=24}" Style="{StaticResource MaterialDesignNavigationRailTabItem}" Width="65" Foreground="White">
                 
             </TabItem>
 
-            <TabItem Name="TbItmEmployee" Header="{materialDesign:PackIcon Kind=AccountSupervisor, Size=24}" Style="{StaticResource MaterialDesignNavigationRailTabItem}" Width="65" Foreground="White">
+            <TabItem Name="TbItmEmployee" ToolTip="Employees" Header="{materialDesign:PackIcon Kind=AccountSupervisor, Size=24}" Style="{StaticResource MaterialDesignNavigationRailTabItem}" Width="65" Foreground="White">
                 
             </TabItem>
 
-            <TabItem Name="TbItmClient" Header="{materialDesign:PackIcon Kind=AccountTie, Size=24}" Style="{StaticResource MaterialDesignNavigationRailTabItem}" Width="65" Foreground="White">
+            <TabItem Name="TbItmClient" ToolTip="Clients" Header="{materialDesign:PackIcon Kind=AccountTie, Size=24}" Style="{StaticResource MaterialDesignNavigationRailTabItem}" Width="65" Foreground="White">
 
             </TabItem>
 
-            <TabItem Name="TbItmJobs" Header="{materialDesign:PackIcon Kind=Briefcase, Size=24}" Style="{StaticResource MaterialDesignNavigationRailTabItem}" Width="65" Foreground="White">
+            <TabItem Name="TbItmJobs" ToolTip="Jobs" Header="{materialDesign:PackIcon Kind=Briefcase, Size=24}" Style="{StaticResource MaterialDesignNavigationRailTabItem}" Width="65" Foreground="White">
 
             </TabItem>
 
         </TabControl>
 
-        <Frame Name="FrmViews" Grid.Column="1" Grid.Row="2" Source="/Pages/Dashboard.xaml" Margin="5" NavigationUIVisibility="Hidden" />
+        <Frame Name="FrmViews" Grid.Column="1" Grid.Row="2" Source="/Pages/Dashboard.xaml"  NavigationUIVisibility="Hidden" />
     </Grid>
 
 </Window>

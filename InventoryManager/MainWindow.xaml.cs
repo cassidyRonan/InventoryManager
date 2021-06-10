@@ -49,19 +49,19 @@ namespace InventoryManager
             //Default page navigation
             FrmViews.Navigate(dashboardPage);
 
+            //Create new sqlite database if one doesn't already exist
             SQLHandler.CreateNewDB(@"C:\Users\ronan\Documents\Test\");
-
-            ClientObject client = new ClientObject(0, "TestCompany", "First", "Last", "first.last@gmail.com", "+353 090 123 4567", "Old thingy Lane, Co. Antrim");
-            client.ID = SQLHandler.InsertIntoDB(@"C:\Users\ronan\Documents\Test\", SQLConverter.InsertStatement("ClientTable",client));
-            SQLHandler.SelectFromDB(@"C:\Users\ronan\Documents\Test\","SELECT * FROM ClientTable;");
         }
 
         private void MainRailMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            //Ensures that sellection changed source is a tab control
             if(e.Source is TabControl)
             {
+                //Cast source as TabItem to get header
                 TabItem selectedTab = e.AddedItems[0] as TabItem;
 
+                //Take in Header name and use for deciding frame navigation destination
                 switch (selectedTab.Name)
                 {
                     default:
@@ -85,6 +85,19 @@ namespace InventoryManager
                         FrmViews.Navigate(jobsPage);
                         break;
                 }
+            }
+        }
+
+        /// <summary>
+        /// On Key Down Handler for 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OnKeyDownHandler(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Return)
+            {
+                //On Enter Hit
             }
         }
     }

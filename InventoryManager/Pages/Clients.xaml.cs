@@ -37,8 +37,25 @@ namespace InventoryManager.Pages
 
             if (clientList != null)
             {
-                LstBxClients.Items.Clear();
-                LstBxClients.ItemsSource = clientList;
+                LstVwClients.ItemsSource = null;
+                LstVwClients.Items.Clear();
+                LstVwClients.ItemsSource = clientList;
+
+                List<string> Companies = new List<string>();
+                Companies.Add("Unspecified");
+                
+                clientList.ForEach(company =>
+                {
+                    if (!Companies.Contains(company.CompanyName))
+                    {
+                        Companies.Add(company.CompanyName);
+                    }
+                });
+
+                CmbBxCompany.ItemsSource = null;
+                CmbBxCompany.Items.Clear();
+                CmbBxCompany.ItemsSource = Companies;
+                CmbBxCompany.SelectedIndex = 0;
             }
         }
     }
