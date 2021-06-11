@@ -18,7 +18,7 @@ namespace InventoryManager.Pages
     /// <summary>
     /// Interaction logic for Clients.xaml
     /// </summary>
-    public partial class Clients : Page, IFilterable
+    public partial class Clients : Page, IFilterable, IRefreshableList
     {
         public bool Filter { get; set; }
 
@@ -27,6 +27,8 @@ namespace InventoryManager.Pages
         public Clients()
         {
             InitializeComponent();
+
+            TrnClient.SelectedIndex = 0;
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
@@ -34,8 +36,9 @@ namespace InventoryManager.Pages
             RefreshList();
         }
 
-        private void RefreshList()
+        public void RefreshList()
         {
+
             LstVwClients.ItemsSource = null;
             LstVwClients.Items.Clear();
 
@@ -54,6 +57,7 @@ namespace InventoryManager.Pages
                 LstVwClients.ItemsSource = clientList;
             }
 
+            TrnClient.SelectedIndex = 0;
         }
 
         public void SetFilter(string searchTerm)
@@ -70,6 +74,50 @@ namespace InventoryManager.Pages
             SearchTerm = searchTerm;
         }
 
+        /// <summary>
+        /// Refresh Button OnClick event which triggers a refresh of the list based on the current filter settings
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnRefreshClients_Click(object sender, RoutedEventArgs e)
+        {
+            RefreshList();
+        }
+
+        /// <summary>
+        /// View Client Button OnClick event which takes the selected item from the list view and changes to the viewing mode.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnViewClient_Click(object sender, RoutedEventArgs e)
+        {
+            TrnClient.SelectedIndex = 1;
+        }
+
+        /// <summary>
+        /// Add Client Button OnClick event which shows the UI for adding a new client to the database.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnAddClient_Click(object sender, RoutedEventArgs e)
+        {
+            TrnClient.SelectedIndex = 2;
+        }
+
+        /// <summary>
+        /// Edit Client Button OnClick event which shows the UI for editing the selected list view item.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnEditClient_Click(object sender, RoutedEventArgs e)
+        {
+            TrnClient.SelectedIndex = 3;
+        }
+
+        private void BtnClientList_Click(object sender, RoutedEventArgs e)
+        {
+            TrnClient.SelectedIndex = 0;
+        }
     }
 
 
@@ -84,5 +132,13 @@ namespace InventoryManager.Pages
         public string SearchTerm { get; set; }
 
         public void SetFilter(string searchTerm);
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public interface IRefreshableList
+    {
+        public void RefreshList();
     }
 }

@@ -63,9 +63,9 @@ namespace InventoryManager
             SQLHandler.CreateNewDB(@"C:\Users\ronan\Documents\Test\");
 
             //TODO: REMOVE BEFORE PUBLISHING
-            //Dummy Data
-            SQLHandler.InsertIntoDB(@"C:\Users\ronan\Documents\Test\", SQLConverter.InsertStatement("ClientTable",new ClientObject(0,"ANS","Mark","Cassidy","mc@gmail.com","+353 086 236 0189","Test Address")));
-            SQLHandler.InsertIntoDB(@"C:\Users\ronan\Documents\Test\", SQLConverter.InsertStatement("ClientTable",new ClientObject(0,"Nano Studios","Ronan","Cassidy","rc@gmail.com","+353 434 236 0189","Yes Address")));
+            ////Dummy Data
+            //SQLHandler.InsertIntoDB(@"C:\Users\ronan\Documents\Test\", SQLConverter.InsertStatement("ClientTable",new ClientObject(0,"ANS","Mark","Cassidy","mc@gmail.com","+353 086 236 0189","Test Address")));
+            //SQLHandler.InsertIntoDB(@"C:\Users\ronan\Documents\Test\", SQLConverter.InsertStatement("ClientTable",new ClientObject(0,"Nano Studios","Ronan","Cassidy","rc@gmail.com","+353 434 236 0189","Yes Address")));
         }
 
         /// <summary>
@@ -123,19 +123,19 @@ namespace InventoryManager
                 switch (CmbBxSearchType.SelectedValue.ToString())
                 {
                     case "Employee":
-                        LoadPage(employeePage,TxtBxSearch.Text);
+                        SearchLoad(inventoryPage, 2, TxtBxSearch.Text);
                         break;
 
                     case "Equipment":
-                        LoadPage(inventoryPage, TxtBxSearch.Text);
+                        SearchLoad(inventoryPage, 1, TxtBxSearch.Text);
                         break;
 
                     case "Clients":
-                        LoadPage(clientPage, TxtBxSearch.Text);
+                        SearchLoad(clientPage, 3, TxtBxSearch.Text);
                         break;
 
                     case "Jobs":
-                        LoadPage(jobsPage, TxtBxSearch.Text);
+                        SearchLoad(jobsPage, 4, TxtBxSearch.Text);
                         break;
                 }
             }
@@ -151,6 +151,26 @@ namespace InventoryManager
         {
             (page as IFilterable).SetFilter(filter); 
             FrmViews.Navigate(page);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="page"></param>
+        /// <param name="railIndex"></param>
+        /// <param name="filter"></param>
+        private void SearchLoad(Page page,int railIndex,string filter)
+        {
+            if (MainRailMenu.SelectedIndex != railIndex)
+            {
+                MainRailMenu.SelectedIndex = railIndex;
+                LoadPage(page, filter);
+            }
+            else
+            {
+                (page as IFilterable).SetFilter(filter);
+                (page as IRefreshableList).RefreshList();
+            }
         }
     }
 }

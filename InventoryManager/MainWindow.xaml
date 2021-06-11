@@ -37,7 +37,13 @@
                         <Button Content="Create New File" />
 
                         <!-- Load Data File Button -->
-                        <Button Content="Load Data File" />
+                        <Button Content="Load Database" />
+
+                        <!-- Load Data File Button -->
+                        <Button Content="Backup Database" />
+
+                        <!-- Load Data File Button -->
+                        <Button Content="Convert Legacy File" />
 
                     </StackPanel>
                 </materialDesign:PopupBox>

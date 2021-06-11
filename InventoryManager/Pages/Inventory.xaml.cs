@@ -16,7 +16,7 @@ namespace InventoryManager.Pages
     /// <summary>
     /// Interaction logic for Inventory.xaml
     /// </summary>
-    public partial class Inventory : Page, IFilterable
+    public partial class Inventory : Page, IFilterable, IRefreshableList
     {
         public bool Filter { get; set; }
 
@@ -32,7 +32,7 @@ namespace InventoryManager.Pages
             RefreshList();
         }
 
-        private void RefreshList()
+        public void RefreshList()
         {
             //List<ClientObject> clientList;
             //clientList = InventoryDAL.GetClients();

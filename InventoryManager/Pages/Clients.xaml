@@ -23,15 +23,16 @@
             <ToolBar  Style="{DynamicResource MaterialDesignToolBar}" ClipToBounds="False" HorizontalContentAlignment="Left" >
                 
                 <!-- Refresh Client List Button -->
-                <Button Name="BtnRefreshClients" ToolTip="Refresh Clients List" Content="{materialDesign:PackIcon Kind=Refresh}" />
+                <Button Name="BtnRefreshClients" ToolTip="Refresh Clients List" Content="{materialDesign:PackIcon Kind=Refresh}" Click="BtnRefreshClients_Click" />
                 <Separator />
                 
                 <!-- Client List Button Group -->
-                <Button Name="BtnViewClient" ToolTip="View Selected Client"  Content="{materialDesign:PackIcon Kind=AccountEye}" />
-                <Button Name="BtnAddClient" ToolTip="Add New Client" Content="{materialDesign:PackIcon Kind=AccountPlus}" />
-                <Button Name="BtnEditClient" ToolTip="Edit Client" Content="{materialDesign:PackIcon Kind=AccountEdit}" />
+                <Button Name="BtnClientList" ToolTip="Client List"  Content="{materialDesign:PackIcon Kind=ViewListOutline}" Click="BtnClientList_Click" />
+                <Button Name="BtnViewClient" ToolTip="View Selected Client"  Content="{materialDesign:PackIcon Kind=AccountEye}" Click="BtnViewClient_Click" />
+                <Button Name="BtnAddClient" ToolTip="Add New Client" Content="{materialDesign:PackIcon Kind=AccountPlus}" Click="BtnAddClient_Click" />
+                <Button Name="BtnEditClient" ToolTip="Edit Client" Content="{materialDesign:PackIcon Kind=AccountEdit}" Click="BtnEditClient_Click" />
                 <Separator />
-                
+
                 <!-- List Filters 
                 <Label Content="Company Name:" VerticalAlignment="Center" />
                 <ComboBox Name="CmbBxCompany" MinWidth="100"/>
@@ -43,24 +44,86 @@
         </ToolBarTray>
 
         <!-- Client List Card -->
-        <materialDesign:Card Grid.Row="2" Margin="10"
-          Background="#FFF0F0F0"
-          Padding="0" UniformCornerRadius="10" Grid.ColumnSpan="2">
-            
-            <ListView Name="LstVwClients" ItemsSource="{Binding ClientObject}">
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn DisplayMemberBinding="{Binding CompanyName}" Header="Company" />
-                        <GridViewColumn DisplayMemberBinding="{Binding FirstName}" Header="First Name" />
-                        <GridViewColumn DisplayMemberBinding="{Binding LastName}" Header="Last Name" />
-                        <GridViewColumn DisplayMemberBinding="{Binding Email}" Header="Email" />
-                        <GridViewColumn DisplayMemberBinding="{Binding Phone}" Header="Phone" />
-                        <GridViewColumn DisplayMemberBinding="{Binding Address}" Header="Address" />
+        <materialDesign:Transitioner Name="TrnClient" SelectedIndex="0" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
 
-                    </GridView>
-                </ListView.View>
-            </ListView>
-            
-        </materialDesign:Card>
+            <!-- Clients View List -->
+            <materialDesign:TransitionerSlide>
+                <materialDesign:TransitionerSlide.BackwardWipe>
+                    <materialDesign:SlideWipe Direction="Down" />
+                </materialDesign:TransitionerSlide.BackwardWipe>
+                <materialDesign:TransitionerSlide.ForwardWipe>
+                    <materialDesign:SlideWipe Direction="Up" />
+                </materialDesign:TransitionerSlide.ForwardWipe>
+
+                <materialDesign:Card Grid.Row="2" Margin="10"
+              Background="#FFF0F0F0"
+              Padding="0" UniformCornerRadius="10" Grid.ColumnSpan="2">
+
+                    <ListView Name="LstVwClients" ItemsSource="{Binding ClientObject}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn DisplayMemberBinding="{Binding CompanyName}" Header="Company" />
+                                <GridViewColumn DisplayMemberBinding="{Binding FirstName}" Header="First Name" />
+                                <GridViewColumn DisplayMemberBinding="{Binding LastName}" Header="Last Name" />
+                                <GridViewColumn DisplayMemberBinding="{Binding Email}" Header="Email" />
+                                <GridViewColumn DisplayMemberBinding="{Binding Phone}" Header="Phone" />
+                                <GridViewColumn DisplayMemberBinding="{Binding Address}" Header="Address" />
+
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+
+                </materialDesign:Card>
+            </materialDesign:TransitionerSlide>
+
+            <!-- Client View Screen -->
+            <materialDesign:TransitionerSlide>
+                <materialDesign:TransitionerSlide.BackwardWipe>
+                    <materialDesign:SlideWipe Direction="Down" />
+                </materialDesign:TransitionerSlide.BackwardWipe>
+                <materialDesign:TransitionerSlide.ForwardWipe>
+                    <materialDesign:SlideWipe Direction="Up" />
+                </materialDesign:TransitionerSlide.ForwardWipe>
+
+                <materialDesign:Card Grid.Row="2" Margin="10"
+                  Background="#FF2F51A0"
+                  Padding="0" UniformCornerRadius="10" Grid.ColumnSpan="2">
+                </materialDesign:Card>
+            </materialDesign:TransitionerSlide>
+
+            <!-- Client Add Screen -->
+            <materialDesign:TransitionerSlide>
+                <materialDesign:TransitionerSlide.BackwardWipe>
+                    <materialDesign:SlideWipe Direction="Down" />
+                </materialDesign:TransitionerSlide.BackwardWipe>
+                <materialDesign:TransitionerSlide.ForwardWipe>
+                    <materialDesign:SlideWipe Direction="Up" />
+                </materialDesign:TransitionerSlide.ForwardWipe>
+                
+                <materialDesign:Card Grid.Row="2" Margin="10"
+                  Background="#FF92A92C"
+                  Padding="0" UniformCornerRadius="10" Grid.ColumnSpan="2">
+
+                </materialDesign:Card>
+            </materialDesign:TransitionerSlide>
+
+            <!-- Client Edit Screen -->
+            <materialDesign:TransitionerSlide>
+                <materialDesign:TransitionerSlide.BackwardWipe>
+                    <materialDesign:SlideWipe Direction="Down" />
+                </materialDesign:TransitionerSlide.BackwardWipe>
+                <materialDesign:TransitionerSlide.ForwardWipe>
+                    <materialDesign:SlideWipe Direction="Up" />
+                </materialDesign:TransitionerSlide.ForwardWipe>
+
+                <materialDesign:Card Grid.Row="2" Margin="10"
+                  Background="#FFD03333"
+                  Padding="0" UniformCornerRadius="10" Grid.ColumnSpan="2">
+
+                </materialDesign:Card>
+            </materialDesign:TransitionerSlide>
+
+        </materialDesign:Transitioner>
+
     </Grid>
 </Page>
