@@ -32,10 +32,11 @@
                 <Button Name="BtnEditClient" ToolTip="Edit Client" Content="{materialDesign:PackIcon Kind=AccountEdit}" />
                 <Separator />
                 
-                <!-- List Filters -->
+                <!-- List Filters 
                 <Label Content="Company Name:" VerticalAlignment="Center" />
                 <ComboBox Name="CmbBxCompany" MinWidth="100"/>
-                <Separator />
+                <Button Name="BtnClearFilter" ToolTip="Clear Filter" Content="{materialDesign:PackIcon Kind=CloseCircle}" />
+                <Separator /> -->
                 
                 
             </ToolBar>

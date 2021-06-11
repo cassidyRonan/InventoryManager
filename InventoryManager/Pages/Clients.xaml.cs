@@ -18,8 +18,12 @@ namespace InventoryManager.Pages
     /// <summary>
     /// Interaction logic for Clients.xaml
     /// </summary>
-    public partial class Clients : Page
+    public partial class Clients : Page, IFilterable
     {
+        public bool Filter { get; set; }
+
+        public string SearchTerm { get; set; }
+
         public Clients()
         {
             InitializeComponent();
@@ -32,31 +36,53 @@ namespace InventoryManager.Pages
 
         private void RefreshList()
         {
+            LstVwClients.ItemsSource = null;
+            LstVwClients.Items.Clear();
+
             List<ClientObject> clientList;
-            clientList = InventoryDAL.GetClients();
 
-            if (clientList != null)
+            if (Filter)
             {
-                LstVwClients.ItemsSource = null;
-                LstVwClients.Items.Clear();
+                //Retrieval of Client List from SQLite DB with search term taken into account
+                clientList = InventoryDAL.GetClients(SearchTerm);
                 LstVwClients.ItemsSource = clientList;
-
-                List<string> Companies = new List<string>();
-                Companies.Add("Unspecified");
-                
-                clientList.ForEach(company =>
-                {
-                    if (!Companies.Contains(company.CompanyName))
-                    {
-                        Companies.Add(company.CompanyName);
-                    }
-                });
-
-                CmbBxCompany.ItemsSource = null;
-                CmbBxCompany.Items.Clear();
-                CmbBxCompany.ItemsSource = Companies;
-                CmbBxCompany.SelectedIndex = 0;
             }
+            else
+            {
+                //Retrieval of Client List from SQLite DB
+                clientList = InventoryDAL.GetClients();
+                LstVwClients.ItemsSource = clientList;
+            }
+
         }
+
+        public void SetFilter(string searchTerm)
+        {
+            if (!string.IsNullOrWhiteSpace(searchTerm))
+            {
+                Filter = true;
+            }
+            else
+            {
+                Filter = false;
+            }
+
+            SearchTerm = searchTerm;
+        }
+
+    }
+
+
+
+    /// <summary>
+    /// Interface for Page objects with the ability to filter
+    /// </summary>
+    public interface IFilterable
+    {
+        public bool Filter { get; set; }
+
+        public string SearchTerm { get; set; }
+
+        public void SetFilter(string searchTerm);
     }
 }

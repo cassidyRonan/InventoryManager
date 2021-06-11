@@ -27,6 +27,12 @@ namespace InventoryManager.Utility
             return SQLConverter.ConvertList<ClientObject>(SQLHandler.SelectFromDB(@"C:\Users\ronan\Documents\Test\", "SELECT * FROM ClientTable;"));
         }
 
+        public static List<ClientObject> GetClients(string searchTerm)
+        {
+            searchTerm = searchTerm.ToLower();
+            return SQLConverter.ConvertList<ClientObject>(SQLHandler.SelectFromDB(@"C:\Users\ronan\Documents\Test\", string.Concat("SELECT * FROM ClientTable WHERE lower(Company_Name) LIKE '",searchTerm, "' OR lower(First_Name) LIKE '", searchTerm, "' OR lower(Last_Name) LIKE '", searchTerm, "' OR lower(Email) LIKE '", searchTerm, "' OR lower(Phone) LIKE '", searchTerm, "' OR lower(Address) LIKE '", searchTerm, "';")));
+        }
+
         public static void UpdateItem(ClientObject client)
         {
 

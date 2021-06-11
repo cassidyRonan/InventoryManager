@@ -24,6 +24,10 @@ namespace InventoryManager
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static MainWindow Instance;
+
+        public string SearchTerm { get { return TxtBxSearch.Text.ToLower(); } }
+
         //Application Pages
         Clients clientPage;
         Dashboard dashboardPage;
@@ -37,8 +41,14 @@ namespace InventoryManager
             InitialSetup();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void InitialSetup()
         {
+            //Singleton Pattern
+            Instance = this;
+
             //Initialisation of application pages.
             clientPage = new Clients();
             dashboardPage = new Dashboard();
@@ -51,8 +61,18 @@ namespace InventoryManager
 
             //Create new sqlite database if one doesn't already exist
             SQLHandler.CreateNewDB(@"C:\Users\ronan\Documents\Test\");
+
+            //TODO: REMOVE BEFORE PUBLISHING
+            //Dummy Data
+            SQLHandler.InsertIntoDB(@"C:\Users\ronan\Documents\Test\", SQLConverter.InsertStatement("ClientTable",new ClientObject(0,"ANS","Mark","Cassidy","mc@gmail.com","+353 086 236 0189","Test Address")));
+            SQLHandler.InsertIntoDB(@"C:\Users\ronan\Documents\Test\", SQLConverter.InsertStatement("ClientTable",new ClientObject(0,"Nano Studios","Ronan","Cassidy","rc@gmail.com","+353 434 236 0189","Yes Address")));
         }
 
+        /// <summary>
+        /// Event triggered when rail menu tabs are selected, navigates to page without filter
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MainRailMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             //Ensures that sellection changed source is a tab control
@@ -70,35 +90,67 @@ namespace InventoryManager
                         break;
 
                     case "TbItmInventory":
-                        FrmViews.Navigate(inventoryPage);
+                        LoadPage(inventoryPage, string.Empty);
                         break;
 
                     case "TbItmEmployee":
-                        FrmViews.Navigate(employeePage);
+                        LoadPage(employeePage, string.Empty);
                         break;
 
                     case "TbItmClient":
-                        FrmViews.Navigate(clientPage);
+                        LoadPage(clientPage, string.Empty);
                         break;
 
                     case "TbItmJobs":
-                        FrmViews.Navigate(jobsPage);
+                        LoadPage(jobsPage, string.Empty);
                         break;
                 }
             }
         }
 
+
         /// <summary>
-        /// On Key Down Handler for 
+        /// Key Down Handler for Search Textbox
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void OnKeyDownHandler(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Return)
+            //When Enter is hit and textbox is focused
+            if (e.Key == Key.Enter)
             {
-                //On Enter Hit
+                string selection = CmbBxSearchType.SelectedValue.ToString();
+                switch (CmbBxSearchType.SelectedValue.ToString())
+                {
+                    case "Employee":
+                        LoadPage(employeePage,TxtBxSearch.Text);
+                        break;
+
+                    case "Equipment":
+                        LoadPage(inventoryPage, TxtBxSearch.Text);
+                        break;
+
+                    case "Clients":
+                        LoadPage(clientPage, TxtBxSearch.Text);
+                        break;
+
+                    case "Jobs":
+                        LoadPage(jobsPage, TxtBxSearch.Text);
+                        break;
+                }
             }
+        }
+
+
+        /// <summary>
+        /// Loads the passed in page in the main frame and passes the term in the search bar as a filter
+        /// </summary>
+        /// <param name="page"></param>
+        /// <param name="filter"></param>
+        private void LoadPage(Page page, string filter)
+        {
+            (page as IFilterable).SetFilter(filter); 
+            FrmViews.Navigate(page);
         }
     }
 }

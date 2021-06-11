@@ -16,11 +16,47 @@ namespace InventoryManager.Pages
     /// <summary>
     /// Interaction logic for Jobs.xaml
     /// </summary>
-    public partial class Jobs : Page
+    public partial class Jobs : Page, IFilterable
     {
+        public bool Filter { get; set; }
+
+        public string SearchTerm { get; set; }
+
         public Jobs()
         {
             InitializeComponent();
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            RefreshList();
+        }
+
+        private void RefreshList()
+        {
+            //List<ClientObject> clientList;
+            //clientList = InventoryDAL.GetClients();
+
+            //if (clientList != null)
+            //{
+            //    LstVwClients.ItemsSource = null;
+            //    LstVwClients.Items.Clear();
+            //    LstVwClients.ItemsSource = clientList;
+            //}
+        }
+
+        public void SetFilter(string searchTerm)
+        {
+            if (!string.IsNullOrWhiteSpace(searchTerm))
+            {
+                Filter = true;
+            }
+            else
+            {
+                Filter = false;
+            }
+
+            SearchTerm = searchTerm;
         }
     }
 }

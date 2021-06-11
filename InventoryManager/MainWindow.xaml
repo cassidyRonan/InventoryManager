@@ -13,7 +13,7 @@
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
         mc:Ignorable="d"
-        Title="Inventory Manager" Height="720" Width="1080" MinHeight="720" MinWidth="1080" >
+        Title="Inventory Manager" Height="735" Width="1090" MinHeight="735" MinWidth="1090" >
 
     <Grid Background="#FF262626">
         <Grid.ColumnDefinitions>
@@ -22,35 +22,36 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
-            <RowDefinition Height="5"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
         <!-- Header Bar -->
         <materialDesign:ColorZone Mode="PrimaryMid" Padding="5,0,5,0" VerticalAlignment="Stretch" VerticalContentAlignment="Center" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Background="#0075ca">
             <DockPanel>
-                
+
                 <!-- Header Pop Up Menu -->
                 <materialDesign:PopupBox DockPanel.Dock="Right" PlacementMode="BottomAndAlignRightEdges">
                     <StackPanel Orientation="Vertical">
-                        
+
                         <!-- Create New File Button -->
                         <Button Content="Create New File" />
-                        
+
                         <!-- Load Data File Button -->
                         <Button Content="Load Data File" />
-                        
+
                     </StackPanel>
                 </materialDesign:PopupBox>
 
                 <StackPanel Orientation="Horizontal" materialDesign:RippleAssist.IsCentered="True">
 
+                    <Image Source="/Images/IMSLogoAlt.png" Margin="2,2,10,2" />
+
                     <!-- Combo Box for selecting search category -->
-                    <ComboBox Name="CmbBxSearchType" ToolTip="Search Category" SelectedIndex="0" Margin="8 0 0 0" BorderThickness="0" materialDesign:ColorZoneAssist.Mode="Standard" materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource MaterialDesignPaper}" BorderBrush="{DynamicResource MaterialDesignPaper}">
-                        <ComboBoxItem Content="Inventory" />
+                    <ComboBox Name="CmbBxSearchType" ToolTip="Search Category" SelectedIndex="0" Margin="8 0 0 0" BorderThickness="0" materialDesign:ColorZoneAssist.Mode="Standard" materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource MaterialDesignPaper}" BorderBrush="{DynamicResource MaterialDesignPaper}" SelectedValuePath="Content">
                         <ComboBoxItem Content="Equipment" />
-                        <ComboBoxItem Content="Clients" />
                         <ComboBoxItem Content="Jobs" />
+                        <ComboBoxItem Content="Clients" />
+                        <ComboBoxItem Content="Employee" />
                     </ComboBox>
 
                     <!-- Search Bar On Header -->
@@ -77,11 +78,8 @@
             </DockPanel>
         </materialDesign:ColorZone>
 
-        <!-- Load Progress Bar -->
-        <ProgressBar Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Value="0" Height="5" VerticalAlignment="Top" Foreground="#FF84CB31" BorderBrush="#FF383838" Background="#FF383838" />
-
         <!-- Navigation Rail - Side Menu -->
-        <TabControl Name="MainRailMenu" Style="{StaticResource MaterialDesignNavigatilRailTabControl}" materialDesign:ColorZoneAssist.Mode="PrimaryMid" Grid.Row="2" Grid.Column="0" SelectionChanged="MainRailMenu_SelectionChanged" >
+        <TabControl Name="MainRailMenu" Style="{StaticResource MaterialDesignNavigatilRailTabControl}" materialDesign:ColorZoneAssist.Mode="PrimaryMid" Grid.Row="1" Grid.Column="0" SelectionChanged="MainRailMenu_SelectionChanged" >
 
             <TabItem Name="TbItmDashboard" ToolTip="Dashboard" Header="{materialDesign:PackIcon Kind=ViewDashboard, Size=24}" Style="{StaticResource MaterialDesignNavigationRailTabItem}" Width="65" Foreground="White" >
      
@@ -105,7 +103,7 @@
 
         </TabControl>
 
-        <Frame Name="FrmViews" Grid.Column="1" Grid.Row="2" Source="/Pages/Dashboard.xaml"  NavigationUIVisibility="Hidden" />
+        <Frame Name="FrmViews" Grid.Column="1" Grid.Row="1" Source="/Pages/Dashboard.xaml"  NavigationUIVisibility="Hidden" />
     </Grid>
 
 </Window>
