@@ -49,10 +49,10 @@
             <!-- Clients View List -->
             <materialDesign:TransitionerSlide>
                 <materialDesign:TransitionerSlide.BackwardWipe>
-                    <materialDesign:SlideWipe Direction="Down" />
+                    <materialDesign:SlideWipe Direction="Left" />
                 </materialDesign:TransitionerSlide.BackwardWipe>
                 <materialDesign:TransitionerSlide.ForwardWipe>
-                    <materialDesign:SlideWipe Direction="Up" />
+                    <materialDesign:SlideWipe Direction="Right" />
                 </materialDesign:TransitionerSlide.ForwardWipe>
 
                 <materialDesign:Card Grid.Row="2" Margin="10"
@@ -79,10 +79,10 @@
             <!-- Client View Screen -->
             <materialDesign:TransitionerSlide>
                 <materialDesign:TransitionerSlide.BackwardWipe>
-                    <materialDesign:SlideWipe Direction="Down" />
+                    <materialDesign:SlideWipe Direction="Left" />
                 </materialDesign:TransitionerSlide.BackwardWipe>
                 <materialDesign:TransitionerSlide.ForwardWipe>
-                    <materialDesign:SlideWipe Direction="Up" />
+                    <materialDesign:SlideWipe Direction="Right" />
                 </materialDesign:TransitionerSlide.ForwardWipe>
 
                 <materialDesign:Card Grid.Row="2" Margin="10"
@@ -94,10 +94,10 @@
             <!-- Client Add Screen -->
             <materialDesign:TransitionerSlide>
                 <materialDesign:TransitionerSlide.BackwardWipe>
-                    <materialDesign:SlideWipe Direction="Down" />
+                    <materialDesign:SlideWipe Direction="Left" />
                 </materialDesign:TransitionerSlide.BackwardWipe>
                 <materialDesign:TransitionerSlide.ForwardWipe>
-                    <materialDesign:SlideWipe Direction="Up" />
+                    <materialDesign:SlideWipe Direction="Right" />
                 </materialDesign:TransitionerSlide.ForwardWipe>
                 
                 <materialDesign:Card Grid.Row="2" Margin="10"
@@ -110,10 +110,10 @@
             <!-- Client Edit Screen -->
             <materialDesign:TransitionerSlide>
                 <materialDesign:TransitionerSlide.BackwardWipe>
-                    <materialDesign:SlideWipe Direction="Down" />
+                    <materialDesign:SlideWipe Direction="Left" />
                 </materialDesign:TransitionerSlide.BackwardWipe>
                 <materialDesign:TransitionerSlide.ForwardWipe>
-                    <materialDesign:SlideWipe Direction="Up" />
+                    <materialDesign:SlideWipe Direction="Right" />
                 </materialDesign:TransitionerSlide.ForwardWipe>
 
                 <materialDesign:Card Grid.Row="2" Margin="10"

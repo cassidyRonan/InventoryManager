@@ -22,6 +22,42 @@ namespace InventoryManager.Utility
                               Address VARCHAR(250)
                               );";
 
+        const string JOBCLIENT_TABLE_CREATE_LINE = @"CREATE TABLE IF NOT EXISTS JobClientTable (
+                              JobID INTEGER NOT NULL PRIMARY KEY,
+                              ClientID INTEGER NOT NULL 
+                              );";
+
+        const string JOB_TABLE_CREATE_LINE = @"CREATE TABLE IF NOT EXISTS JobTable (
+                              ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+                              Job_Name VARCHAR(250) NOT NULL,
+                              Job_Number VARCHAR(100) NOT NULL,
+                              Description TEXT,
+                              Location VARCHAR(250),
+                              Start_Date DATE,
+                              End_Date DATE,
+                              );";
+
+        const string EQUIPMENTJOB_TABLE_CREATE_LINE = @"CREATE TABLE IF NOT EXISTS EquipmentJobTable (
+                              JobID INTEGER NOT NULL PRIMARY KEY,
+                              EquipmentID INTEGER NOT NULL 
+                              );";
+
+        const string EMPLOYEE_TABLE_CREATE_LINE = @"CREATE TABLE IF NOT EXISTS EmployeeTable (
+                              ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+                              First_Name VARCHAR(50) NOT NULL,
+                              Last_Name VARCHAR(50) NOT NULL,
+                              Email VARCHAR(128),
+                              Phone VARCHAR(30),
+                              Address VARCHAR(250)
+                              );";
+
+        const string EQUIPMENTEMPLOYEE_TABLE_CREATE_LINE = @"CREATE TABLE IF NOT EXISTS EquipmentJobTable (
+                              EmployeeID INTEGER NOT NULL PRIMARY KEY,
+                              EquipmentID INTEGER NOT NULL 
+                              );";
+
+
+
         public static void Save()
         {
         }
@@ -53,8 +89,20 @@ namespace InventoryManager.Utility
                 //Creation of Client Table
                 ExecuteNonQuery(CLIENT_TABLE_CREATE_LINE, db_connection);
 
+                //Creation of Job-Client Table for keeping track of what jobs belong to clients
+                ExecuteNonQuery(JOBCLIENT_TABLE_CREATE_LINE, db_connection);
+
                 //Creation of Job Table
-                //ExecuteNonQuery("", db_connection);
+                ExecuteNonQuery(JOB_TABLE_CREATE_LINE, db_connection);
+
+                //Creation of Equipment-Job Table for keeping track of what equipment belongs to a job
+                ExecuteNonQuery(EQUIPMENTJOB_TABLE_CREATE_LINE, db_connection);
+
+                //Creation of Employee Table
+                ExecuteNonQuery(EMPLOYEE_TABLE_CREATE_LINE, db_connection);
+
+                //Creation of Equipment-Employee Table for keeping track of what equipment is checked out by an employee
+                ExecuteNonQuery(EQUIPMENTEMPLOYEE_TABLE_CREATE_LINE, db_connection);
 
 
                 //Closing of SQLite DB connection

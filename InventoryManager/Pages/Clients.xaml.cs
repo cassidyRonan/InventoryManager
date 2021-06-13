@@ -91,7 +91,11 @@ namespace InventoryManager.Pages
         /// <param name="e"></param>
         private void BtnViewClient_Click(object sender, RoutedEventArgs e)
         {
-            TrnClient.SelectedIndex = 1;
+            if(LstVwClients.SelectedItem != null)
+            {
+
+                TrnClient.SelectedIndex = 1;
+            }
         }
 
         /// <summary>
@@ -111,7 +115,10 @@ namespace InventoryManager.Pages
         /// <param name="e"></param>
         private void BtnEditClient_Click(object sender, RoutedEventArgs e)
         {
-            TrnClient.SelectedIndex = 3;
+            if (LstVwClients.SelectedItem != null)
+            {
+                TrnClient.SelectedIndex = 3;
+            }
         }
 
         private void BtnClientList_Click(object sender, RoutedEventArgs e)
