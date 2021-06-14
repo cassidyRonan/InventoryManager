@@ -21,11 +21,11 @@
 
         <ToolBarTray Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0">
             <ToolBar  Style="{DynamicResource MaterialDesignToolBar}" ClipToBounds="False" HorizontalContentAlignment="Left" >
-                
+
                 <!-- Refresh Client List Button -->
                 <Button Name="BtnRefreshClients" ToolTip="Refresh Clients List" Content="{materialDesign:PackIcon Kind=Refresh}" Click="BtnRefreshClients_Click" />
                 <Separator />
-                
+
                 <!-- Client List Button Group -->
                 <Button Name="BtnClientList" ToolTip="Client List"  Content="{materialDesign:PackIcon Kind=ViewListOutline}" Click="BtnClientList_Click" />
                 <Button Name="BtnViewClient" ToolTip="View Selected Client"  Content="{materialDesign:PackIcon Kind=AccountEye}" Click="BtnViewClient_Click" />
@@ -38,8 +38,8 @@
                 <ComboBox Name="CmbBxCompany" MinWidth="100"/>
                 <Button Name="BtnClearFilter" ToolTip="Clear Filter" Content="{materialDesign:PackIcon Kind=CloseCircle}" />
                 <Separator /> -->
-                
-                
+
+
             </ToolBar>
         </ToolBarTray>
 
@@ -55,11 +55,12 @@
                     <materialDesign:SlideWipe Direction="Right" />
                 </materialDesign:TransitionerSlide.ForwardWipe>
 
+                <!-- CLIENT VIEW CARD -->
                 <materialDesign:Card Grid.Row="2" Margin="10"
               Background="#FFF0F0F0"
               Padding="0" UniformCornerRadius="10" Grid.ColumnSpan="2">
 
-                    <ListView Name="LstVwClients" ItemsSource="{Binding ClientObject}">
+                    <ListView Name="LstVwClients" MouseDoubleClick="LstVwClients_MouseDoubleClick" ItemsSource="{Binding ClientObject}">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn DisplayMemberBinding="{Binding CompanyName}" Header="Company" />
@@ -85,9 +86,56 @@
                     <materialDesign:SlideWipe Direction="Right" />
                 </materialDesign:TransitionerSlide.ForwardWipe>
 
+                <!-- CLIENT INFO CARD -->
+
                 <materialDesign:Card Grid.Row="2" Margin="10"
-                  Background="#FF2F51A0"
-                  Padding="0" UniformCornerRadius="10" Grid.ColumnSpan="2">
+                  Background="{x:Null}"
+                  Padding="0" UniformCornerRadius="10" Grid.ColumnSpan="2" >
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="340"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+
+                        <materialDesign:Card Grid.Column="0" Margin="5" Background="#FFF0F0F0" Padding="0" UniformCornerRadius="5" >
+
+                            <StackPanel Orientation="Vertical" Margin="10">
+                                <TextBlock Name="TxtBlkCompanyName" Text="Nano Studios" FontSize="24" TextDecorations="{x:Null}"  FontFamily="Roboto" FontWeight="Normal" VerticalAlignment="Stretch" />
+                                <Separator Style="{StaticResource MaterialDesignDarkSeparator}" />
+
+                                <TextBlock Text="Name" FontSize="16" TextDecorations="{x:Null}"  FontFamily="Roboto Thin" FontWeight="Normal" Foreground="#FF7D7D7D" />
+                                <TextBlock Name="TxtBlkClientName" Text="Ronan Cassidy" FontSize="20" Margin="0,0,0,10" FontFamily="Roboto Thin" />
+
+                                <TextBlock Text="Phone" FontSize="16" TextDecorations="{x:Null}"  FontFamily="Roboto Thin" FontWeight="Normal" Foreground="#FF7D7D7D" />
+                                <TextBlock Name="TxtBlkClientPhone" Text="+353 086 236 0189" FontSize="20" Margin="0,0,0,10" FontFamily="Roboto Thin" />
+
+                                <TextBlock Text="Email" FontSize="16" TextDecorations="{x:Null}"  FontFamily="Roboto Thin" FontWeight="Normal" Foreground="#FF7D7D7D" />
+                                <TextBlock Name="TxtBlkClientEmail" Text="ronanmcassidy@gmail.com" FontSize="20" Margin="0,0,0,10" FontFamily="Roboto Thin" />
+
+                                <TextBlock Text="Address" FontSize="16" TextDecorations="{x:Null}"  FontFamily="Roboto Thin" FontWeight="Normal" Foreground="#FF7D7D7D" />
+                                <TextBlock Name="TxtBlkClientAddress" Text="Tester Lane, Markovich Road, Athlone, Co.Westmeath, Ireland" FontSize="20" FontFamily="Roboto Thin" FontStyle="Normal" TextWrapping="Wrap" />
+                            </StackPanel>
+
+                        </materialDesign:Card>
+
+                        <materialDesign:Card Grid.Column="1" Grid.RowSpan="2" Margin="5" Background="#FFF0F0F0" Padding="0" UniformCornerRadius="5" FontFamily="Roboto">
+
+                            <ListView Name="LstVwJobs" MouseDoubleClick="LstVwJobs_MouseDoubleClick" ItemsSource="{Binding JobObject}" >
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn DisplayMemberBinding="{Binding JobName}" Header="Job Name" />
+                                        <GridViewColumn DisplayMemberBinding="{Binding JobNumber}" Header="Job Number" />
+                                        <GridViewColumn DisplayMemberBinding="{Binding Location}" Header="Location" />
+                                        <GridViewColumn DisplayMemberBinding="{Binding StartDate}" Header="Start Date" />
+                                        <GridViewColumn DisplayMemberBinding="{Binding StartDate}" Header="End Date" />
+
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                        </materialDesign:Card>
+
+                    </Grid>
                 </materialDesign:Card>
             </materialDesign:TransitionerSlide>
 
@@ -99,11 +147,45 @@
                 <materialDesign:TransitionerSlide.ForwardWipe>
                     <materialDesign:SlideWipe Direction="Right" />
                 </materialDesign:TransitionerSlide.ForwardWipe>
-                
-                <materialDesign:Card Grid.Row="2" Margin="10"
-                  Background="#FF92A92C"
-                  Padding="0" UniformCornerRadius="10" Grid.ColumnSpan="2">
 
+                <materialDesign:Card Grid.Row="2" Margin="10"
+                  Background="{x:Null}"
+                  Padding="0" UniformCornerRadius="10" Grid.ColumnSpan="2" >
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition Height="70"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="340"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+
+                        <materialDesign:Card Grid.Column="1" Margin="5,5,5,5" Background="#FFF0F0F0" Padding="0" UniformCornerRadius="5" Grid.RowSpan="2" >
+
+                            <StackPanel Orientation="Vertical" Margin="10">
+                                <TextBox Name="TxtBxCompanyNameAdd" materialDesign:HintAssist.Hint="Company Name" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" FontSize="20" />
+                                <Separator Style="{StaticResource MaterialDesignDarkSeparator}" />
+
+                                <TextBox Name="TxtBxClientFirstNameAdd" materialDesign:HintAssist.Hint="First Name" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" FontSize="16" />
+
+                                <TextBox Name="TxtBxClientLastNameAdd" materialDesign:HintAssist.Hint="Last Name" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" FontSize="16" />
+
+                                <TextBox Name="TxtBxClientPhoneAdd" materialDesign:HintAssist.Hint="Phone" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" FontSize="16" />
+
+                                <TextBox Name="TxtBxClientEmailAdd" materialDesign:HintAssist.Hint="Email" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" FontSize="16" />
+
+                                <TextBox Name="TxtBxClientAddressAdd" materialDesign:HintAssist.Hint="Address" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" FontSize="16" TextWrapping="Wrap" AcceptsReturn="True" />
+
+                            </StackPanel>
+
+                        </materialDesign:Card>
+
+                        <Button Name="BtnClientAdd" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="ADD CLIENT" FontFamily="Roboto" Margin="10" Width="250" FontWeight="Bold" FontStyle="Normal"/>
+
+                    </Grid>
                 </materialDesign:Card>
             </materialDesign:TransitionerSlide>
 
@@ -117,9 +199,43 @@
                 </materialDesign:TransitionerSlide.ForwardWipe>
 
                 <materialDesign:Card Grid.Row="2" Margin="10"
-                  Background="#FFD03333"
-                  Padding="0" UniformCornerRadius="10" Grid.ColumnSpan="2">
+                  Background="{x:Null}"
+                  Padding="0" UniformCornerRadius="10" Grid.ColumnSpan="2" >
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition Height="70"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="340"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
 
+
+                        <materialDesign:Card Grid.Column="1" Margin="5,5,5,5" Background="#FFF0F0F0" Padding="0" UniformCornerRadius="5" Grid.RowSpan="2" >
+
+                            <StackPanel Orientation="Vertical" Margin="10">
+                                <TextBox Name="TxtBxCompanyName" materialDesign:HintAssist.Hint="Company Name" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" FontSize="20" />
+                                <Separator Style="{StaticResource MaterialDesignDarkSeparator}" />
+
+                                <TextBox Name="TxtBxClientFirstName" materialDesign:HintAssist.Hint="First Name" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" FontSize="16" />
+
+                                <TextBox Name="TxtBxClientLastName" materialDesign:HintAssist.Hint="Last Name" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" FontSize="16" />
+
+                                <TextBox Name="TxtBxClientPhone" materialDesign:HintAssist.Hint="Phone" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" FontSize="16" />
+
+                                <TextBox Name="TxtBxClientEmail" materialDesign:HintAssist.Hint="Email" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" FontSize="16" />
+
+                                <TextBox Name="TxtBxClientAddress" materialDesign:HintAssist.Hint="Address" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" FontSize="16" TextWrapping="Wrap" AcceptsReturn="True" />
+
+                            </StackPanel>
+
+                        </materialDesign:Card>
+
+                        <Button Name="BtnSaveClientEdits" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="SAVE CHANGES" FontFamily="Roboto" Margin="10" Width="250" FontWeight="Bold" FontStyle="Normal"/>
+                        
+                    </Grid>
                 </materialDesign:Card>
             </materialDesign:TransitionerSlide>
 

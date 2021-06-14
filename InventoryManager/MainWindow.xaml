@@ -53,7 +53,7 @@
                     <Image Source="/Images/IMSLogoAlt.png" Margin="2,2,10,2" />
 
                     <!-- Combo Box for selecting search category -->
-                    <ComboBox Name="CmbBxSearchType" ToolTip="Search Category" SelectedIndex="0" Margin="8 0 0 0" BorderThickness="0" materialDesign:ColorZoneAssist.Mode="Standard" materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource MaterialDesignPaper}" BorderBrush="{DynamicResource MaterialDesignPaper}" SelectedValuePath="Content">
+                    <ComboBox Name="CmbBxSearchType" ToolTip="Search Category" SelectedIndex="0" Margin="8 0 0 0" BorderThickness="0" materialDesign:ColorZoneAssist.Mode="Standard" materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource MaterialDesignPaper}" BorderBrush="{DynamicResource MaterialDesignPaper}" SelectedValuePath="Content" FontFamily="Roboto">
                         <ComboBoxItem Content="Equipment" />
                         <ComboBoxItem Content="Jobs" />
                         <ComboBoxItem Content="Clients" />
@@ -76,7 +76,7 @@
                             <TextBox Name="TxtBxSearch" Grid.Column="1" Margin="8 0 0 0"
                                 materialDesign:HintAssist.Hint="Search..."
                                 materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
-                                BorderThickness="0" MinWidth="350" VerticalAlignment="Center" KeyDown="OnKeyDownHandler" />
+                                BorderThickness="0" MinWidth="350" VerticalAlignment="Center" KeyDown="OnKeyDownHandler" FontFamily="Roboto" />
                         </Grid>
                     </materialDesign:ColorZone>
 

@@ -93,7 +93,19 @@ namespace InventoryManager.Pages
         {
             if(LstVwClients.SelectedItem != null)
             {
+                ClientObject selectedClient = LstVwClients.SelectedValue as ClientObject;
 
+                //Set selected clients details to view card
+                TxtBlkCompanyName.Text = selectedClient.CompanyName;
+                TxtBlkClientName.Text = string.Concat(selectedClient.FirstName, " ", selectedClient.LastName);
+                TxtBlkClientPhone.Text = string.Concat(selectedClient.Phone);
+                TxtBlkClientEmail.Text = string.Concat(selectedClient.Email);
+                TxtBlkClientAddress.Text = string.Concat(selectedClient.Address);
+
+                //Get job objects which have a match to this client
+                //LstVwJobs.ItemsSource = 
+
+                //Transition to view info card
                 TrnClient.SelectedIndex = 1;
             }
         }
@@ -117,6 +129,16 @@ namespace InventoryManager.Pages
         {
             if (LstVwClients.SelectedItem != null)
             {
+                ClientObject selectedClient = LstVwClients.SelectedValue as ClientObject;
+
+                //Set selected clients details to view card
+                TxtBxCompanyName.Text = selectedClient.CompanyName;
+                TxtBxClientFirstName.Text = selectedClient.FirstName;
+                TxtBxClientLastName.Text = selectedClient.LastName;
+                TxtBxClientPhone.Text = selectedClient.Phone;
+                TxtBxClientEmail.Text = selectedClient.Email;
+                TxtBxClientAddress.Text = selectedClient.Address;
+
                 TrnClient.SelectedIndex = 3;
             }
         }
@@ -124,6 +146,32 @@ namespace InventoryManager.Pages
         private void BtnClientList_Click(object sender, RoutedEventArgs e)
         {
             TrnClient.SelectedIndex = 0;
+        }
+
+        private void LstVwJobs_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void LstVwClients_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (LstVwClients.SelectedItem != null)
+            {
+                ClientObject selectedClient = LstVwClients.SelectedValue as ClientObject;
+
+                //Set selected clients details to view card
+                TxtBlkCompanyName.Text = selectedClient.CompanyName;
+                TxtBlkClientName.Text = string.Concat(selectedClient.FirstName, " ", selectedClient.LastName);
+                TxtBlkClientPhone.Text = string.Concat(selectedClient.Phone);
+                TxtBlkClientEmail.Text = string.Concat(selectedClient.Email);
+                TxtBlkClientAddress.Text = string.Concat(selectedClient.Address);
+
+                //Get job objects which have a match to this client
+                //LstVwJobs.ItemsSource = 
+
+                //Transition to view info card
+                TrnClient.SelectedIndex = 1;
+            }
         }
     }
 
