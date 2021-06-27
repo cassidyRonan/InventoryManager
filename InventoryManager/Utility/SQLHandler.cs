@@ -12,6 +12,7 @@ namespace InventoryManager.Utility
     static public class SQLHandler
     {
         const string DB_FILENAME = "InventoryDB.sqlite";
+
         const string CLIENT_TABLE_CREATE_LINE = @"CREATE TABLE IF NOT EXISTS ClientTable (
                               ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
                               Company_Name VARCHAR(250) NOT NULL,
@@ -27,18 +28,19 @@ namespace InventoryManager.Utility
                               ClientID INTEGER NOT NULL 
                               );";
 
-        const string JOB_TABLE_CREATE_LINE = @"CREATE TABLE IF NOT EXISTS JobTable (
+        const string JOB_TABLE_CREATE_LINE = @"CREATE TABLE IF NOT EXISTS JobTable(
                               ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
                               Job_Name VARCHAR(250) NOT NULL,
                               Job_Number VARCHAR(100) NOT NULL,
                               Description TEXT,
                               Location VARCHAR(250),
                               Start_Date DATE,
-                              End_Date DATE,
+                              End_Date DATE
                               );";
 
         const string EQUIPMENTJOB_TABLE_CREATE_LINE = @"CREATE TABLE IF NOT EXISTS EquipmentJobTable (
-                              JobID INTEGER NOT NULL PRIMARY KEY,
+                              ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+                              JobID INTEGER NOT NULL,
                               EquipmentID INTEGER NOT NULL 
                               );";
 
@@ -52,20 +54,41 @@ namespace InventoryManager.Utility
                               );";
 
         const string EQUIPMENTEMPLOYEE_TABLE_CREATE_LINE = @"CREATE TABLE IF NOT EXISTS EquipmentJobTable (
-                              EmployeeID INTEGER NOT NULL PRIMARY KEY,
+                              ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+                              EmployeeID INTEGER NOT NULL,
                               EquipmentID INTEGER NOT NULL 
                               );";
 
+        const string EQUIPMENT_TABLE_CREATE_LINE = @"CREATE TABLE IF NOT EXISTS EquipmentTable (
+                              ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+                              Name VARCHAR(250) NOT NULL,
+                              Description TEXT,
+                              Barcode VARCHAR(50),
+                              Group_Barcode VARCHAR(50),
+                              Serial_Number VARCHAR(100),
+                              Category VARCHAR(100),
+                              Type VARCHAR(100),
+                              Manufacturer VARCHAR(250),
+                              Model VARCHAR(250),
+                              Location VARCHAR(250),
+                              Calibration_One_Date DATE,
+                              Calibration_Two_Date DATE,
+                              Last_Modified DATE,
+                              State VARCHAR(16),
+                              Image_Path VARCHAR(250),
+                              Certificate_Path VARCHAR(250)
+                              );";
+
+        const string EQUIPMENT_LOG_TABLE_CREATE_LINE = @"CREATE TABLE IF NOT EXISTS EquipmentLogTable (
+                              ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+                              EquipmentID INTEGER NOT NULL,
+                              EmployeeID INTEGER NOT NULL,
+                              Details VARCHAR(250),
+                              State VARCHAR(25),
+                              ReturnDate DATE );";
 
 
-        public static void Save()
-        {
-        }
-
-        public static void Load()
-        {
-
-        }
+        //CRUD OPERATIONS
 
         /// <summary>
         /// Creates a new SQLite Database at the specified filepath with the predetermined schema.
@@ -95,6 +118,9 @@ namespace InventoryManager.Utility
                 //Creation of Job Table
                 ExecuteNonQuery(JOB_TABLE_CREATE_LINE, db_connection);
 
+                //Creation of Equipment Table for keeping track of equipment
+                ExecuteNonQuery(EQUIPMENT_TABLE_CREATE_LINE, db_connection);
+
                 //Creation of Equipment-Job Table for keeping track of what equipment belongs to a job
                 ExecuteNonQuery(EQUIPMENTJOB_TABLE_CREATE_LINE, db_connection);
 
@@ -104,6 +130,8 @@ namespace InventoryManager.Utility
                 //Creation of Equipment-Employee Table for keeping track of what equipment is checked out by an employee
                 ExecuteNonQuery(EQUIPMENTEMPLOYEE_TABLE_CREATE_LINE, db_connection);
 
+                //Creation of Equipment Log Table for recording of any equipment damages on return
+                ExecuteNonQuery(EQUIPMENT_LOG_TABLE_CREATE_LINE, db_connection);
 
                 //Closing of SQLite DB connection
                 db_connection.Close();
@@ -165,6 +193,10 @@ namespace InventoryManager.Utility
         }
 
 
+
+
+        //SQL Execution Commands
+
         /// <summary>
         /// Executes a non-query operation on the connected SQLite database. Intended use is for creation of tables.
         /// </summary>
@@ -188,7 +220,6 @@ namespace InventoryManager.Utility
         {
             //Creation of SQLite command object and initialisation
             SQLiteCommand command = new SQLiteCommand(sql, connection);
-
             //Execute the command
             return command.ExecuteScalar();
         }

@@ -65,7 +65,7 @@ namespace InventoryManager
             //TODO: REMOVE BEFORE PUBLISHING
             ////Dummy Data
             //SQLHandler.InsertIntoDB(@"C:\Users\ronan\Documents\Test\", SQLConverter.InsertStatement("ClientTable",new ClientObject(0,"ANS","Mark","Cassidy","mc@gmail.com","+353 086 236 0189","Test Address")));
-            //SQLHandler.InsertIntoDB(@"C:\Users\ronan\Documents\Test\", SQLConverter.InsertStatement("ClientTable",new ClientObject(0,"Nano Studios","Ronan","Cassidy","rc@gmail.com","+353 434 236 0189","Yes Address")));
+            SQLHandler.InsertIntoDB(@"C:\Users\ronan\Documents\Test\", SQLConverter.InsertStatement("ClientTable",new ClientObject(0,"Nano Studios","Ronan","Cassidy","ronancassidy.work@gmail.com","+353 000 000 0000","Dummy Address")));
         }
 
         /// <summary>
