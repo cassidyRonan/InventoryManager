@@ -8,6 +8,7 @@ namespace InventoryManager.Utility
 {
     public static class SQLConverter
     {
+        #region Insert Statements
 
         /// <summary>
         /// Takes the object's data and converts it to a string for inserting the object into a SQLite table.
@@ -19,6 +20,57 @@ namespace InventoryManager.Utility
         {
             return string.Concat("INSERT INTO ", tableName, " (Company_Name, First_Name, Last_Name, Email, Phone, Address)", " VALUES ", "(\'", client.CompanyName, "\',\'", client.FirstName, "\',\'", client.LastName, "\',\'", client.Email, "\',\'", client.Phone, "\',\'", client.Address, "\');");
         }
+
+        public static string InsertStatement(string tableName, EmployeeObject employee)
+        {
+            return string.Concat("INSERT INTO ", tableName, " (First_Name, Last_Name, Email, Phone, Address)", " VALUES ", "(\'", employee.FirstName, "\',\'", employee.LastName, "\',\'", employee.Email, "\',\'", employee.Phone, "\',\'", employee.Address, "\');");
+        }
+
+        public static string InsertStatement(string tableName, EquipmentLog log)
+        {
+            return string.Concat("INSERT INTO ", tableName, " (EquipmentID, EmployeeID, Details, State, ReturnDate)", " VALUES ", "(\'", log.EquipmentID, "\',\'", log.EmployeeID, "\',\'", log.Details, "\',\'", log.State, "\',\'", log.ReturnDate.ToSQL(), "\');");
+        }
+
+        public static string InsertStatement(string tableName, EquipmentObject equipment)
+        {
+            return string.Concat("INSERT INTO ", tableName, " (Name, Description, Barcode, Group_Barcode, Serial_Number, Category, Type, Manufacturer, Model, Location, Calibration_One_Date, Calibration_Two_Date, Last_Modified, State, Image_Path, Certificate_Path)", " VALUES ", "(\'", equipment.Name, "\',\'", equipment.Description, "\',\'", equipment.Barcode, "\',\'", equipment.GroupBarcode, "\',\'", equipment.SerialNumber, "\',\'", equipment.Category, "\',\'", equipment.Type, "\',\'", equipment.Manufacturer, "\',\'", equipment.Model, "\',\'", equipment.Location, "\',\'", equipment.CalibrationOneDate.ToSQL(), "\',\'", equipment.CalibrationTwoDate.ToSQL(), "\',\'", equipment.LastModified, "\',\'", equipment.State, "\',\'", @equipment.ImagePath, "\',\'", @equipment.CertificatePath, "\');");
+        }
+
+        public static string InsertStatement(string tableName, JobObject client)
+        {
+            return string.Concat("INSERT INTO ", tableName, " (Job_Name, Job_Number, Description, Location, Start_Date, End_Date)", " VALUES ", "(\'", client.JobName, "\',\'", client.JobNumber, "\',\'", client.Description, "\',\'", client.Location, "\',\'", client.StartDate.ToSQL(), "\',\'", client.EndDate.ToSQL(), "\');");
+        }
+
+        public static string InsertStatement(string tableName, List<string> values)
+        {
+            StringBuilder stringBuild = new StringBuilder("INSERT INTO ");
+            stringBuild.Append(tableName);
+            stringBuild.Append(" VALUES ");
+            stringBuild.Append("(\'");
+            for (int i = 0; i < values.Count - 1; i++)
+            {
+                stringBuild.Append(values[i]);
+                stringBuild.Append("\',\'");
+            }
+            stringBuild.Append(values[values.Count - 1]);
+            stringBuild.Append("\');");
+            return stringBuild.ToString(); 
+            
+                //string.Concat("INSERT INTO ", tableName, " VALUES ", "(\'", idOne, "\',\'", idTwo, "\');");
+        }
+
+        #endregion
+
+
+        #region Read Statements
+
+        public static void ReadStatement(string tableName, long id)
+        {
+
+        }
+
+        #endregion
+
 
 
 
@@ -71,5 +123,13 @@ namespace InventoryManager.Utility
 
             return castType;
         }
+
+        private static string ToSQL(this DateTime dateTime)
+        {
+            return dateTime.ToString("yyyy-MM-dd HH:mm:ss");
+        }
     }
+
+
+  
 }

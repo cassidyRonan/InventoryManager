@@ -24,7 +24,8 @@ namespace InventoryManager.Utility
                               );";
 
         const string JOBCLIENT_TABLE_CREATE_LINE = @"CREATE TABLE IF NOT EXISTS JobClientTable (
-                              JobID INTEGER NOT NULL PRIMARY KEY,
+                              ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+                              JobID INTEGER NOT NULL,
                               ClientID INTEGER NOT NULL 
                               );";
 
@@ -148,10 +149,7 @@ namespace InventoryManager.Utility
                 SQLiteConnection db_connection = new SQLiteConnection(string.Concat("Data Source=", filePath, DB_FILENAME, ";"));
                 db_connection.Open();
 
-                //Execute non-query commands to create the structure of the database and varying tables.
-                //TODO: Give option to read in schema externally to allow user to specify the structure themselves if desired. (Will need formatting check)
 
-                //Creation of Client Table
                 ExecuteScalar(sqlStatement, db_connection);
 
                 //Get id of inserted record
@@ -166,6 +164,23 @@ namespace InventoryManager.Utility
 
             //Return negative value if the file does not exist
             return -1;
+        }
+
+        public static void UpdateIntoDB(string filePath, string sqlStatement)
+        {
+            //Ensure that sqlite file exists.
+            if (File.Exists(string.Concat(filePath, DB_FILENAME)))
+            {
+                //Connect to the SQLite database
+                SQLiteConnection db_connection = new SQLiteConnection(string.Concat("Data Source=", filePath, DB_FILENAME, ";"));
+                db_connection.Open();
+
+                ExecuteScalar(sqlStatement, db_connection);
+
+                //Closing of SQLite DB connection
+                db_connection.Close();
+            }
+
         }
 
         public static List<Dictionary<string, TypeValuePair>> SelectFromDB(string filePath,string sqlStatement)
